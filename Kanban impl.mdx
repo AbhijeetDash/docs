@@ -1,0 +1,20 @@
+# Kanban in docable
+
+Workflow
+
+`Docable -> Firebase || Firebase trigger function -> Github`
+
+`Github -> Webhook -> update Firebase -> Docable`
+
+**Other Info -** 
+
+Collection : `projects/{projectId}/issues` 
+
+```plaintext
+{
+"id": task id,
+"title": issue title,
+"description": issue description // MDX,
+"status": "NOT_STARTED" || "IN_PROGRESS" == Open || "COMPLETED" || "NOT_PLANNED" == Closed
+}
+```
