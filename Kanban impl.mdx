@@ -1,10 +1,10 @@
 # Kanban in docable
 
-Workflow
+Workflow 
 
-`Docable -> Firebase || Firebase trigger function -> Github`
+`Docable -> Firebase Function -> Firebase && Github`
 
-`Github -> Webhook -> update Firebase -> Docable`
+`Github -> WebHook -> update Firebase -> Docable`
 
 **Other Info -**
 
@@ -40,12 +40,6 @@ Have button to view details.
 
 ### Callable and WebHooks
 
-Docable -&gt; Github
+**<span style="background-color: #92400E">Docable -&gt; Github</span>** -  in this case docable client will call the appropriate firebase functions. Each firebase function 
 
 Github -&gt; Docable
-
-Will also do the same but with the document in `projects/{project_id}/issues/{issueId}`
-
-`CreateBranchWebHook` Will be called if someone creates a branch in a issue in github.
-
-`CreateBranch` Will be called from docable to create a branch for a given github issue.
