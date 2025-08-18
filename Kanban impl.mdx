@@ -6,15 +6,32 @@ Workflow
 
 `Github -> Webhook -> update Firebase -> Docable`
 
-**Other Info -** 
+**Other Info -**
 
-Collection : `projects/{projectId}/issues` 
+Collection : `projects/{projectId}/issues`
 
-```plaintext
+<div data-type="callout-critical">
+Repository : codebase not the docs repo.
+</div>
+
+```json
 {
 "id": task id,
 "title": issue title,
 "description": issue description // MDX,
-"status": "NOT_STARTED" || "IN_PROGRESS" == Open || "COMPLETED" || "NOT_PLANNED" == Closed
+"status": "NOT_STARTED" || "IN_PROGRESS" == Open || "COMPLETED" || "NOT_PLANNED" == Closed,
+"assigned_to": ['github_user_id'],
+"branch": {
+  "name": "branch_name",
+  "link": "link to the branch"
+},
+"type": "BUG" || "FEATURE" || "TASK",
+"label": "", // All pre-defined labels 
+"ts_created": timestamp,
+"ts_updated": timestamp,
 }
 ```
+
+<div data-type="callout-idea">
+Have button to view details.
+</div>
