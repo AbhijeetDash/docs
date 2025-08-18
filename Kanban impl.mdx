@@ -1,45 +1,107 @@
-# Kanban in docable
+# Project Plan for Notion-like Editor with Git Integration
 
-Workflow 
+This document outlines the comprehensive plan for developing a Notion-like editor that utilises Git for version control and integrates a Kanban-style task tracking system backed by GitHub issues. The project leverages Docable's GitHub app for seamless integration.
 
-`Docable -> Firebase Function -> Firebase && Github`
+## Project Overview
 
-`Github -> WebHook -> update Firebase -> Docable`
+The goal of this project is to create a collaborative editor that combines the flexibility of Notion with the robust version control capabilities of Git. Additionally, the project will feature a Kanban-style task management system that synchronises with GitHub issues.
 
-**Other Info -**
+## Key Features
 
-Collection : `projects/{projectId}/issues`
+- Notion-like editor interface
+- Git-based version control
+- Kanban-style task tracking
+- Integration with GitHub issues
+- Utilisation of Docable's GitHub app
 
-<div data-type="callout-critical">
-Repository : codebase not the docs repo.
+## Implementation Plan
+
+### Phase 1: Research and Planning
+
+- [ ] Conduct market research on existing solutions
+
+- [ ] Define project requirements and scope
+
+- [ ] Design system architecture
+
+- [ ] Set up project repository and initial configurations
+
+### Phase 2: Development
+
+- [ ] Develop the editor interface
+
+- [ ] Implement Git integration for version control
+
+- [ ] Develop Kanban board for task tracking
+
+- [ ] Integrate GitHub issues with the Kanban board
+
+- [ ] Test integration with Docable's GitHub app
+
+## Technical Requirements
+
+- Docable's GitHub app for integration
+- RESTful API for backend services
+
+## Timeline
+
+<div stream-node-id="vRJQNQQA5atU_node_19" data-type="table-wrapper" class="table-wrapper-container">
+<table style="min-width: 150px"><colgroup><col style="min-width: 50px"><col style="min-width: 50px"><col style="min-width: 50px"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Phase</p></th><th colspan="1" rowspan="1"><p>Start Date</p></th><th colspan="1" rowspan="1"><p>End Date</p></th></tr><tr><td colspan="1" rowspan="1"><p>Research and Planning</p></td><td colspan="1" rowspan="1"><p>19 Aug 2025</p></td><td colspan="1" rowspan="1"><p>20 Aug 2025</p></td></tr><tr><td colspan="1" rowspan="1"><p>Development</p></td><td colspan="1" rowspan="1"><p>21 Aug 2025</p></td><td colspan="1" rowspan="1"><p>5 Sept 2025</p></td></tr></tbody></table>
 </div>
 
-```json
+## Workflow
+
+Github issue should be our single source of truth. Our firebase should always be updated according to Github and Docable client should reflect firebase. There will be the following two sequence of data flow. 
+
+1. Docable -&gt; Firebase Function -&gt; Firestore && Github
+2. Github -&gt; WebHook -&gt; update Firestore -&gt; Docable
+
+### Firestore Collection
+
+Collection : `projects/{projectId}/issues` 
+
+Github User Id : `users/{userId}/integrations/{githubinfo_id}`
+
+<div data-type="callout-critical">
+Repository is the codebase not the docs repo.
+</div>
+
+Document structure for issue object in firestore.
+
+```javascript
 {
-"id": task id,
-"title": issue title,
-"description": issue description // MDX,
-"status": "NOT_STARTED" || "IN_PROGRESS" == Open || "COMPLETED" || "NOT_PLANNED" == Closed,
-"assigned_to": ['github_user_id'],
-"branch": {
-  "name": "branch_name",
-  "link": "link to the branch"
-},
-"type": "BUG" || "FEATURE" || "TASK",
-"label": "", // All pre-defined labels 
-"ts_created": timestamp,
-"ts_updated": timestamp,
+  "id": "task id",
+  "title": "issue title",
+  "description": "issue description", // MDX,
+  "status": "NOT_STARTED" || "IN_PROGRESS" == Open || "COMPLETED" ||      "NOT_PLANNED" == Closed,
+  "assigned_to": [
+    {
+      "userId": "docable_user_id",
+      "githubId": "github_user_id", // Get this from integration object
+    }
+  ],
+  "branch": {
+    "name": "branch_name",
+    "link": "link to the branch"
+  },
+  "type": "BUG" || "FEATURE" || "TASK",
+  "label": "", // All pre-defined labels 
+  "ts_created": timestamp,
+  "ts_updated": timestamp,
 }
 ```
 
-<div data-type="callout-idea">
-Have button to view details.
-</div>
-
-## Firebase function
+### Firebase function
 
 ### Callable and WebHooks
 
-**<span style="background-color: #92400E">Docable -&gt; Github</span>** -  in this case docable client will call the appropriate firebase functions. Each firebase function 
+<span>**<span>Docable -&gt; Github</span>**</span> - in this case docable client will call the appropriate firebase functions. There will following functions - 
 
-Github -&gt; Docable
+- `CreateIssue` - This creates a Github issue and if successful creates a issue object in firestore. The below link documents the REST API for creating an issue.\
+  <https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#create-an-issue>
+- `UpdateIssue` - This updates any required field in Github. The below link documents the REST API to update an issue. <https://docs.github.com/en/rest/issues/issues?apiVersion=2022-11-28#update-an-issue>
+- `AssignIssue` - This allows to assign this issue to particular user. This will assign the issue to the given list of users using their `github_id` . 
+
+**Github -&gt; Docable -** If in case user directly interacts with a issue in Github we will need to update the firestore document to reflect the change. For this we will use WebHooks via the Docable Github app.
+
+For details related to the Webhook - <https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=assigned#issues>
