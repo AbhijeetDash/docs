@@ -68,7 +68,8 @@ Document structure for issue object in firestore.
 
 ```javascript
 {
-  "id": "task id",
+  "id": "kanban_boardId_UUID",
+  "issueId": "github issue id"
   "title": "issue title",
   "description": "issue description", // MDX,
   "status": "NOT_STARTED" || "IN_PROGRESS" == Open || "COMPLETED" ||      "NOT_PLANNED" == Closed,
