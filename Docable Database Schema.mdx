@@ -1,0 +1,29 @@
+Below is the database schema for docable editor.
+
+## Collection
+
+1. Users - Information about the user profile
+2. Workspaces - Every user will have a workspace `workspace_{userId}`
+3. Projects - Projects are in relation to user and belong to workspace. `projects_{projectId}`
+4. Memberships - Member defines users relation to workspace. User can define memberships to allow other user to join their workspace. `memberships_{workspaceId}_{userId}`
+5. Waitlist - Pretty obvious
+
+## Sub-collections
+
+1. Users → Integrations - Integrations define users permission to their git platform. The only supported platforms are GitHub, GitLab and Bitbucket.
+2. Workspace → Repositories - These are information about the git repositories that user has allowed access to i.e codebases from users integrations. Repositories will scoped to workspace and can be attached to projects.
+3. Project → kanbans (to store kanban node data) -&gt; issues (sub-collection) -&gt; to store issues in that Kanban board.
+4. Project → comments → When user creates a comment block in the editor it is created with a random hash and we store it here.
+
+```plaintext
+// User's object
+export interface IUser {
+	id: string;
+	displayName: string;
+	email: string;
+	photoURL?: string;
+	lastProjectId?: string | null;
+	draftProjectId: string | null;
+	createdAt: Timestamp;
+}
+```
