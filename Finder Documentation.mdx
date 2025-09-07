@@ -1,0 +1,42 @@
+# FindContext Class Documentation
+
+The \`FindContext\` class is designed to extract contextual information around a specified prompt within a file. It focuses on retrieving import statements, pre-context, post-context, and the trimmed version of the prompt from the file content.
+
+## Responsibilities
+
+- Extract surrounding lines (context) around a given prompt within a file
+- Handle verbose mode for logging detailed information during context extraction
+- Return a structured context including imports, pre-prompt lines, the prompt itself, and post-prompt lines
+
+## Method: findPromptContext
+
+The \`findPromptContext\` method is responsible for finding the context surrounding a prompt in the file content.
+
+### Parameters
+
+<div data-node-id="j1ITxea9IuQy_node_8" data-type="table-wrapper" class="table-wrapper-container">
+<table style="min-width: 150px"><colgroup><col style="min-width: 50px"><col style="min-width: 50px"><col style="min-width: 50px"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p data-node-id="3626b825-cc29-4b1f-93ad-638295217fa3">Parameter</p></th><th colspan="1" rowspan="1"><p data-node-id="71628638-dbf2-43d4-a3aa-d3502ead025a">Type</p></th><th colspan="1" rowspan="1"><p data-node-id="e93a9161-dee9-442f-91f5-ed6428b614c6">Description</p></th></tr><tr><td colspan="1" rowspan="1"><p data-node-id="b12ca908-f002-4c9b-9243-018b272c8f36">index</p></td><td colspan="1" rowspan="1"><p data-node-id="b49e5341-3864-47bc-8039-a3169b204f82">number</p></td><td colspan="1" rowspan="1"><p data-node-id="c632257f-3818-46cc-9db3-8e0c9d2960ee">The index (line number) where the prompt appears in the file</p></td></tr><tr><td colspan="1" rowspan="1"><p data-node-id="928c063d-317a-4263-887b-57880d1d894d">fileContent</p></td><td colspan="1" rowspan="1"><p data-node-id="9e28940f-b41b-42ff-bfed-72385ccb204e">string</p></td><td colspan="1" rowspan="1"><p data-node-id="d7250fab-4780-4ef9-8e38-2ae41b003594">The entire content of the file as a string</p></td></tr><tr><td colspan="1" rowspan="1"><p data-node-id="479d5dd2-8d28-431e-95c5-e85b2f32da66">prompt</p></td><td colspan="1" rowspan="1"><p data-node-id="f6eff461-4ce7-49a8-b3eb-7574962f22b0">string</p></td><td colspan="1" rowspan="1"><p data-node-id="0979108f-7e24-4936-99f2-4ae276c47bd8">The specific prompt text to find in the file</p></td></tr><tr><td colspan="1" rowspan="1"><p data-node-id="a41c37ae-d44e-445b-b161-bc668747de8b">verbose</p></td><td colspan="1" rowspan="1"><p data-node-id="ba212544-e2e1-40d2-aed0-2c1cb9e691b0">boolean</p></td><td colspan="1" rowspan="1"><p data-node-id="1f8b84e9-9358-4e86-b352-4f99194092ac">A flag indicating whether to log detailed messages</p></td></tr></tbody></table>
+</div>
+
+### Returns
+
+An array containing the imports, pre-context, trimmed prompt, and post-context.
+
+### Example Usage
+
+```javascript
+const findContext = require('./core/finder/find.context.js');
+const context = findContext.findPromptContext(10, fileContent, 'your-prompt', true);
+```
+
+## Error Handling
+
+Any errors encountered during context extraction are logged and thrown to ensure that issues can be diagnosed and resolved effectively.
+
+<div data-node-id="j1ITxea9IuQy_node_15" data-type="callout-warning">
+Ensure that the file content is correctly formatted and the prompt is accurately specified to avoid errors during context extraction.
+</div>
+
+## Future Enhancements
+
+There is a TODO note indicating an update to add context extraction from multiple files, which suggests future enhancements to the functionality of the \`FindContext\` class.
