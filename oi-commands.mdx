@@ -1,0 +1,86 @@
+write a usage documentation including all CLI commands for oi.
+
+<div data-type="ainode">
+</div>
+
+# OI CLI Usage Documentation
+
+This document provides a comprehensive guide on how to use the \`oi\` CLI application, including all available commands and their options.
+
+## Commands Overview
+
+- init - Initialize a new project
+- start - Start watching files and upload them to Ollama
+- config - Update project settings in oi-config.json
+
+## Command Details
+
+### init
+
+The \`init\` command initializes a new project by creating a configuration file and setting up the necessary environment.
+
+<div data-node-id="23d29cc5-e6ee-462d-a429-81cfcdd15730" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="c41474b6-352c-47be-bbab-ad03ba3b9abe"><code class="language-oi">init</code></pre></div>
+</div>
+
+Options for \`init\` command:
+
+- \-o, --output &lt;path&gt; - Specify a custom configuration file path
+- \-i, --ignore &lt;files...&gt; - Specify files or directories to ignore
+- \-v, --verbose - Enable verbose output
+- \-n, --project-name &lt;name&gt; - Specify a project name
+
+### start
+
+The \`start\` command begins watching files for changes related to prompts and uploads them to Ollama.
+
+<div data-node-id="38b2a26f-312c-46c8-9074-9afa22294e94" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="9f9c87c1-5b58-432f-84c0-b6052afd18f9"><code class="language-oi">start</code></pre></div>
+</div>
+
+Options for \`start\` command:
+
+- \-v, --verbose - Enable verbose output
+
+### config
+
+The \`config\` command updates project settings in the \`oi-config.json\` file, allowing for both global and local configuration updates.
+
+<div data-node-id="c70a9783-029c-4cfd-bc13-7629250d2caa" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="b7d1cd8e-f7fc-4848-a756-a9897b2c4615"><code class="language-oi">config</code></pre></div>
+</div>
+
+Options for \`config\` command:
+
+- \-n, --project-name &lt;name&gt; - Update project name
+- \-i, --ignore &lt;files...&gt; - Specify files or directories to ignore
+- \-g, --global - Set global variables like API keys and organization IDs
+- \-sa, --set-active - Set the active platform
+
+## Example Usage
+
+### Initialize a Project
+
+<div data-node-id="3d02cca7-ddba-49e8-bdbd-e28f5e7a9a1a" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="745a97ca-5148-4ff3-b277-5d443917a70d"><code class="language-oi">init -o ./custom-path/oi-config.json -i node_modules dist -v -n "MyProject"</code></pre></div>
+</div>
+
+### Start Watching Files
+
+<div data-node-id="de6b56c0-7787-410a-ae2a-05257c82de32" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="c3778418-418e-4f1a-b84f-fae7d60ad6b5"><code class="language-oi">start -v</code></pre></div>
+</div>
+
+### Update Configuration
+
+<div data-node-id="009e424c-2404-4ab6-a91d-102c39b2fd6b" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="36584cfb-e86d-4a57-bd56-801669a46b6c"><code class="language-oi">config -n "UpdatedProjectName" -i logs temp -g</code></pre></div>
+</div>
+
+<div data-node-id="2C9qkKCrTAo6_node_28" data-type="callout-idea">
+Use the `--verbose` option to get detailed output for debugging and understanding the process flow.
+</div>
+
+---
+
+<span data-node-id="2C9qkKCrTAo6_node_30" data-text="CLI ||" data-type="tag">CLI ||</span><span data-node-id="2C9qkKCrTAo6_node_31" data-text="Configuration ||" data-type="tag">Configuration ||</span><span data-node-id="2C9qkKCrTAo6_node_32" data-text="File Watching" data-type="tag">File Watching</span>
