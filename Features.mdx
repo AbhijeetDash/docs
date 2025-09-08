@@ -1,0 +1,114 @@
+<div data-type="ainode">
+</div>
+
+# Major Features of Oi-Override
+
+Oi-Override is a versatile CLI tool designed to enhance your development workflow with AI-powered code generation capabilities. Below are the major features that make Oi-Override a valuable addition to any developer's toolkit.
+
+## Key Features
+
+- IDE Agnostic: Seamlessly integrates with any IDE.
+- AI-Powered Code Generation: Utilizes OpenAI’s API for generating code based on embedded prompts.
+- Live File Monitoring: Continuously observes project files for updates and code generation prompts.
+- Simple Prompting Syntax: Employs intuitive patterns like \`//&gt; &lt;//\` for guiding AI in code ge`ration`.
+
+  ## Quick Installation
+
+  Oi-Override can be easily installed using npm. For more installation options, refer to the \[installation guide\](https://github.com/oi-overide/oi-overide/blob/main/Installation/Installation.md).
+
+  ```bash
+  npm i -g overide
+  ```
+
+  ## Usage
+
+  For detailed usage instructions, please consult the \[Detailed Usage Guide\](https://github.com/oi-overide/oi-overide/blob/main/Usage/Commands.md).
+
+  ### Adding API Key
+
+  Before starting, configure your API key and other necessary information using the following command:
+
+  ```bash
+  oi config --global
+  ```
+
+  If multiple platforms are configured, select an active platform with:
+
+  ```bash
+  oi config --select-active
+  ```
+
+  ### Initialize a Project
+
+  To set up Oi-Override in your project, execute the following command in your project directory:
+
+  ```bash
+  oi init
+  ```
+
+  This command creates a configuration file and prepares Oi for use with your project.
+
+  ### Start Monitoring
+
+  After initialization, begin monitoring project files for code generation prompts with:
+
+  ```bash
+  oi start
+  ```
+
+  Oi will actively watch the project directory and respond to detected prompts.
+
+  ### Insert Prompts for Code Generation
+
+  Use prompts in your code files to specify where Oi should generate code. For example:
+
+  ```javascript
+  //> Generate a function to add two numbers <//
+  ```
+
+  Oi will generate and insert the required code at the prompt location.
+
+  ```javascript
+  //- Generate a function to add two numbers
+    const function = sum(a, b) {
+      return a + b;
+    }
+    //> Accept the changes (y/n): -//
+  ```
+
+  Based on user input, Oi will either retain or discard the changes.
+
+  ## Configuration
+
+  Oi-Override uses an \`oi-config.json\` file for customization, allowing you to define the AI service, ignore specific files or directories, and configure other options.
+
+  ```json
+  {
+    "name": "project name",
+    "ignore": ["node_modules", "*.test.js"],
+  }
+  ```
+
+  ## Version 2.0 Plan
+  - Project Context Management: Enhance prompt generation with local parsers.
+  - Code Format: Adopt unified diff format for improved code insertion.
+  - Multiple File Edit: Enable editing of multiple files simultaneously for complex tasks.
+  - Script Execution: Automate tasks by writing and executing scripts.
+- 
+
+  ## Contributing
+
+  Contributions from the community are welcome! Follow these steps to contribute:
+  1. Fork the repository.
+  2. Create a new branch for your feature or fix.
+  3. Use the \[target version branch\](https://github.com/oi-overide/oi-overide/blob/main/Contribution/Target%20Version%20Branch..md) as base.
+  4. Submit a pull request and describe your changes.
+- Feel free to open issues for bugs, feature requests, or general feedback!
+
+  ## Community
+
+  Join our \[Discord\](https://discord.com/invite/Z7F4vRq3n8) community to discuss and collaborate on projects, share ideas, and stay updated with the latest developments in the Oi-Override ecosystem.
+
+  ## License
+
+  Oi-Override is licensed under the GNU GPL-2.0 License. See the \[LICENSE\](LICENSE) file for more details.

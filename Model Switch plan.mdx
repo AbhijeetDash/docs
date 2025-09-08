@@ -1,0 +1,66 @@
+<div data-type="ainode">
+</div>
+
+# Implementation Plan for Model Switching in \`oi\`
+
+This implementation plan outlines the steps required to enable users to switch between different models in the \`oi\` CLI application. The goal is to allow users to select and activate different models, such as OpenAI and DeepSeek, and manage their configurations effectively.
+
+## Step 1: Update Configuration Management
+
+Modify the \`Config\` class to support model switching by updating the configuration management logic.
+
+- Add a method to list available models
+- Update the \`handleChangeActivePlatform\` method to include model selection
+- Ensure the configuration file structure supports multiple models
+
+## Step 2: Enhance CLI Commands
+
+Update the CLI commands to include options for model switching and configuration.
+
+- Add a new command option for setting the active model
+- Update the \`config\` command to handle model-specific configurations
+- Ensure the CLI provides feedback on the active model
+
+## Step 3: Modify Network Requests
+
+Update the \`Network\` class to handle requests based on the active model.
+
+- Ensure the \`doRequest\` method supports multiple models
+- Update the \`handleOpenAIRequest\` and \`handleDeepSeekRequest\` methods to use model-specific configurations
+- Add error handling for unsupported models
+
+## Step 4: Update File Watching Logic
+
+Modify the \`WatchInterface\` class to respect model-specific configurations when watching files.
+
+- Ensure the file watcher respects ignore patterns for each model
+- Update logging to include model-specific information
+- Test file watching with different model configurations
+
+## Step 5: Testing and Validation
+
+Conduct thorough testing to ensure the model switching functionality works as expected.
+
+- Test switching between models in various scenarios
+- Validate configuration updates for each model
+- Ensure network requests are correctly routed based on the active model
+
+## Step 6: Documentation
+
+Update the documentation to reflect the new model switching capabilities.
+
+- Add instructions for switching models in the CLI
+- Update configuration management documentation
+- Provide examples of model-specific configurations
+
+<div data-node-id="s19RYak0qtbH_node_21" data-type="callout-idea">
+Consider adding a feature to automatically detect and suggest available models based on user configuration files.
+</div>
+
+<div data-node-id="s19RYak0qtbH_node_22" data-type="callout-warning">
+Ensure backward compatibility with existing configurations to avoid breaking changes for current users.
+</div>
+
+<div data-node-id="s19RYak0qtbH_node_23" data-type="callout-critical">
+Thoroughly test the implementation in a staging environment before deploying to production to prevent disruptions in service.
+</div>
