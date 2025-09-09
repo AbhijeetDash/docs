@@ -1,56 +1,63 @@
-# FindContext Class Documentation
+# Implementation Plan for Model Switching in \`oi\`
 
-The \`FindContext\` class is designed to extract contextual information around a specified prompt within a file. It focuses on retrieving import statements, pre-context, post-context, and the trimmed version of the prompt from the file content.
+This implementation plan outlines the steps required to enable users to switch between different models in the \`oi\` CLI application. The goal is to allow users to select and activate different models, such as OpenAI and DeepSeek, and manage their configurations effectively.
 
-## Responsibilities
+## Step 1: Update Configuration Management
 
-- Extract surrounding lines (context) around a given prompt within a file
-- Handle verbose mode for logging detailed information during context extraction
-- Return a structured context including imports, pre-prompt lines, the prompt itself, and post-prompt lines
+Modify the \`Config\` class to support model switching by updating the configuration management logic.
 
-## Method: findPromptContext
+- Add a method to list available models
+- Update the \`handleChangeActivePlatform\` method to include model selection
+- Ensure the configuration file structure supports multiple models
 
-The \`findPromptContext\` method is responsible for finding the context surrounding a prompt in the file content.
+## Step 2: Enhance CLI Commands
 
-### Parameters
+Update the CLI commands to include options for model switching and configuration.
 
-<div data-node-id="j1ITxea9IuQy_node_8" data-type="table-wrapper" class="table-wrapper-container">
-<table style="min-width: 150px"><colgroup><col style="min-width: 50px"><col style="min-width: 50px"><col style="min-width: 50px"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p data-node-id="3626b825-cc29-4b1f-93ad-638295217fa3">Parameter</p></th><th colspan="1" rowspan="1"><p data-node-id="71628638-dbf2-43d4-a3aa-d3502ead025a">Type</p></th><th colspan="1" rowspan="1"><p data-node-id="e93a9161-dee9-442f-91f5-ed6428b614c6">Description</p></th></tr><tr><td colspan="1" rowspan="1"><p data-node-id="b12ca908-f002-4c9b-9243-018b272c8f36">index</p></td><td colspan="1" rowspan="1"><p data-node-id="b49e5341-3864-47bc-8039-a3169b204f82">number</p></td><td colspan="1" rowspan="1"><p data-node-id="c632257f-3818-46cc-9db3-8e0c9d2960ee">The index (line number) where the prompt appears in the file</p></td></tr><tr><td colspan="1" rowspan="1"><p data-node-id="928c063d-317a-4263-887b-57880d1d894d">fileContent</p></td><td colspan="1" rowspan="1"><p data-node-id="9e28940f-b41b-42ff-bfed-72385ccb204e">string</p></td><td colspan="1" rowspan="1"><p data-node-id="d7250fab-4780-4ef9-8e38-2ae41b003594">The entire content of the file as a string</p></td></tr><tr><td colspan="1" rowspan="1"><p data-node-id="479d5dd2-8d28-431e-95c5-e85b2f32da66">prompt</p></td><td colspan="1" rowspan="1"><p data-node-id="f6eff461-4ce7-49a8-b3eb-7574962f22b0">string</p></td><td colspan="1" rowspan="1"><p data-node-id="0979108f-7e24-4936-99f2-4ae276c47bd8">The specific prompt text to find in the file</p></td></tr><tr><td colspan="1" rowspan="1"><p data-node-id="a41c37ae-d44e-445b-b161-bc668747de8b">verbose</p></td><td colspan="1" rowspan="1"><p data-node-id="ba212544-e2e1-40d2-aed0-2c1cb9e691b0">boolean</p></td><td colspan="1" rowspan="1"><p data-node-id="1f8b84e9-9358-4e86-b352-4f99194092ac">A flag indicating whether to log detailed messages</p></td></tr></tbody></table>
+- Add a new command option for setting the active model
+- Update the \`config\` command to handle model-specific configurations
+- Ensure the CLI provides feedback on the active model
+
+## Step 3: Modify Network Requests
+
+Update the \`Network\` class to handle requests based on the active model.
+
+- Ensure the \`doRequest\` method supports multiple models
+- Update the \`handleOpenAIRequest\` and \`handleDeepSeekRequest\` methods to use model-specific configurations
+- Add error handling for unsupported models
+
+## Step 4: Update File Watching Logic
+
+Modify the \`WatchInterface\` class to respect model-specific configurations when watching files.
+
+- Ensure the file watcher respects ignore patterns for each model
+- Update logging to include model-specific information
+- Test file watching with different model configurations
+
+## Step 5: Testing and Validation
+
+Conduct thorough testing to ensure the model switching functionality works as expected.
+
+- Test switching between models in various scenarios
+- Validate configuration updates for each model
+- Ensure network requests are correctly routed based on the active model
+
+## Step 6: Documentation
+
+Update the documentation to reflect the new model switching capabilities.
+
+- Add instructions for switching models in the CLI
+- Update configuration management documentation
+- Provide examples of model-specific configurations
+
+<div data-node-id="s19RYak0qtbH_node_21" data-type="callout-idea">
+Consider adding a feature to automatically detect and suggest available models based on user configuration files.
 </div>
 
-### Returns
-
-An array containing the imports, pre-context, trimmed prompt, and post-context.
-
-### Example Usage
-
-```javascript
-const findContext = require('./core/finder/find.context.js');
-const context = findContext.findPromptContext(10, fileContent, 'your-prompt', true);
-```
-
-## Error Handling
-
-Any errors encountered during context extraction are logged and thrown to ensure that issues can be diagnosed and resolved effectively.
-
-<div data-node-id="j1ITxea9IuQy_node_15" data-type="callout-warning">
-Ensure that the file content is correctly formatted and the prompt is accurately specified to avoid errors during context extraction.
+<div data-node-id="s19RYak0qtbH_node_22" data-type="callout-warning">
+Ensure backward compatibility with existing configurations to avoid breaking changes for current users.
 </div>
 
-## Future Enhancements
-
-There is a TODO note indicating an update to add context extraction from multiple files, which suggests future enhancements to the functionality of the \`FindContext\` class.
-
-- init - Initialize a new project
-- start - Start watching files
-- config - Update project settings
-
-## Command Details
-
-### init
-
-The \`init\` command initializes a new project by creating a configuration file and setting up initial settings.
-
-<div data-node-id="xaFF3fOTGgXq_node_8" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
-<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="ea2b604d-0ad3-4251-bdf9-7f7bc5925c38"><code class="language-plaintext"></code></pre></div>
+<div data-node-id="s19RYak0qtbH_node_23" data-type="callout-critical">
+Thoroughly test the implementation in a staging environment before deploying to production to prevent disruptions in service.
 </div>
