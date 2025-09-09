@@ -1,0 +1,50 @@
+<div data-type="ainode">
+</div>
+
+# NetworkService Overview
+
+The \`Network\` class is a core component responsible for making API requests to various services, such as OpenAI and DeepSeek, to generate code based on provided request data. It acts as an intermediary, handling the communication and data exchange between the application and these external services.
+
+## Methods of the Network Class
+
+### doRequest(requestData)
+
+This asynchronous method is the primary entry point for generating code. It takes \`requestData\` as a parameter, which includes details about the active service and metadata for the request.
+
+- Validates the presence of active service details
+- Determines the platform (OpenAI or DeepSeek)
+- Calls the appropriate handler method based on the platform
+
+<div data-node-id="A1r0Eq8NCyiU_node_7" data-type="callout-warning">
+Throws an error if no active service details are found or if there are missing credentials.
+</div>
+
+### handleOpenAIRequest(activeServiceDetails, metadata)
+
+This method handles requests specifically for the OpenAI service. It requires \`activeServiceDetails\` and \`metadata\` as parameters.
+
+- Extracts the API key and organization ID from \`activeServiceDetails\`
+- Validates the presence of these credentials
+- Uses the OpenAI SDK to create a chat completion request
+- Returns the generated code response from OpenAI
+
+<div data-node-id="A1r0Eq8NCyiU_node_11" data-type="callout-warning">
+Throws an error if the API key or organization ID is missing.
+</div>
+
+### handleDeepSeekRequest(activeServiceDetails, metadata)
+
+This method is responsible for handling requests to the DeepSeek service. It also requires \`activeServiceDetails\` and \`metadata\`.
+
+- Extracts the API key and base URL from \`activeServiceDetails\`
+- Validates the presence of these credentials
+- Uses the OpenAI SDK with a custom base URL to create a chat completion request
+- Returns the generated code response from DeepSeek
+
+<div data-node-id="A1r0Eq8NCyiU_node_15" data-type="callout-warning">
+Throws an error if the API key or base URL is missing.
+</div>
+
+<div data-node-id="A1r0Eq8NCyiU_node_16" data-type="callout-idea">
+The `Network` class can be extended to support additional services by adding new handler methods similar to `handleOpenAIRequest` and `handleDeepSeekRequest`.
+</div>
