@@ -1,0 +1,68 @@
+<div data-type="ainode">
+</div>
+
+# OI CLI Commands Documentation
+
+This document provides a detailed overview of the available commands in the \`oi\` CLI application. Each command is designed to facilitate different aspects of project configuration and management.
+
+## Initialize Command
+
+The \`init\` command sets up the initial configuration for a new project. It creates a configuration file, manages ignored files, and provides instructions for further setup.
+
+<div data-node-id="da12791c-c131-47d7-aa3b-40c1e36882e9" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="394b2ed8-ddb2-4e97-8317-d5309701b8c3"><code class="language-oi">init</code></pre></div>
+</div>
+
+- \-o, --output &lt;path&gt;: Specify a custom configuration file path
+- \-i, --ignore &lt;files...&gt;: Specify files or directories to ignore
+- \-v, --verbose: Enable verbose output
+- \-n, --project-name &lt;name&gt;: Specify a project name
+
+Example usage:
+
+```shell
+oi init -o ./config/oi-config.json -i node_modules .git -v -n "MyProject"
+```
+
+## Start Command
+
+The \`start\` command initiates the file-watching mechanism to monitor specific files for changes related to prompts in the \`oi\` project.
+
+<div data-node-id="e80b1a2c-3add-4720-a903-c28fe72f2986" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="246407a5-4740-499c-b9b4-7c0ce3dbf621"><code class="language-oi">start</code></pre></div>
+</div>
+
+- \-v, --verbose: Enable verbose output
+
+Example usage:
+
+```shell
+oi start -v
+```
+
+## Config Command
+
+The \`config\` command updates project settings in the \`oi-config.json\` file. It allows for both global and local configuration updates, including setting active platforms and managing ignored files.
+
+<div data-node-id="bc194057-b981-4ece-8258-0869a5b8c915" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="bf913e86-3ce7-4b10-b5cb-b2ff4787b209"><code class="language-oi">config</code></pre></div>
+</div>
+
+- \-n, --project-name &lt;name&gt;: Update project name
+- \-i, --ignore &lt;files...&gt;: Specify files or directories to ignore
+- \-g, --global: Set global variables like API keys and organization IDs
+- \-sa, --set-active: Set the active platform
+
+Example usage:
+
+```shell
+oi config -n "UpdatedProjectName" -i dist coverage -g -sa
+```
+
+<div data-node-id="woQgDEijPh7d_node_21" data-type="callout-idea">
+Use the `-v` or `--verbose` option with any command to get detailed logging output for troubleshooting and verification purposes.
+</div>
+
+---
+
+<span data-node-id="woQgDEijPh7d_node_23" data-text="CLI Commands" data-type="tag">CLI Commands</span><span data-node-id="woQgDEijPh7d_node_24" data-text="OI Configuration" data-type="tag">OI Configuration</span><span data-node-id="woQgDEijPh7d_node_25" data-text="Project Initialization" data-type="tag">Project Initialization</span>
