@@ -1,0 +1,107 @@
+<div data-type="ainode">
+</div>
+
+# Oi-Override CLI Usage Documentation
+
+This document provides detailed instructions on how to use the Oi-Override CLI tool, which facilitates AI-powered code generation within your development workflow.
+
+## Installation
+
+To install Oi-Override, use npm with the following command:
+
+```shell
+npm i -g overide
+```
+
+For more installation options, refer to the \[installation guide\](https://github.com/oi-overide/oi-overide/blob/main/Installation/Installation.md).
+
+## Commands Overview
+
+Oi-Override offers several commands to manage your project and integrate AI-powered code generation. Below is a summary of the available commands.
+
+### Initialize a Project
+
+Use the \`init\` command to set up Oi-Override in your project directory. This command creates a configuration file and prepares your project for code generation.
+
+<div data-node-id="e8a4eda1-6d46-430c-8576-a22c47ea5f2c" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="b5ef5458-bcc5-412d-be7e-23078aabbbce"><code class="language-shell">oi init</code></pre></div>
+</div>
+
+Options for the \`init\` command include:
+
+- \-o, --output &lt;path&gt;: Specify a custom configuration file path
+- \-i, --ignore &lt;files...&gt;: Specify files or directories to ignore
+- \-v, --verbose: Enable verbose output
+- \-n, --project-name &lt;name&gt;: Specify a project name
+
+### Start Monitoring
+
+After initialization, start monitoring your project files for code generation prompts using the \`start\` command.
+
+<div data-node-id="a1fcce2e-6923-44a4-8803-b9223c194e81" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="149bb892-f505-4d7c-a4c7-b05f8568a2a9"><code class="language-shell">oi start</code></pre></div>
+</div>
+
+Options for the \`start\` command include:
+
+- \-v, --verbose: Enable verbose output
+
+### Configure Project Settings
+
+Update project settings in the \`oi-config.json\` file using the \`config\` command. This command allows you to manage project-specific and global settings.
+
+<div data-node-id="b9a3e3fe-9c2b-40af-9bbb-c563ad5ed524" activeindex="0" tabs="Request 1" data-type="custom-request" class="custom-request">
+<div tabindex="0" data-type="request-content" class="request-content"><pre data-node-id="06aa183b-8b38-438a-a340-089f757fbbc8"><code class="language-shell">oi config</code></pre></div>
+</div>
+
+Options for the \`config\` command include:
+
+- \-n, --project-name &lt;name&gt;: Update project name
+- \-i, --ignore &lt;files...&gt;: Specify files or directories to ignore
+- \-g, --global: Set global variables like API keys and org IDs
+- \-sa, --set-active: Set active platform
+
+## Code Generation Prompts
+
+Insert prompts in your code files to guide Oi-Override in generating code. Use the pattern \`//&gt; &lt;//\` to specify where code should be generated.
+
+```javascript
+//> Generate a function to add two numbers <//
+```
+
+Oi-Override will generate the required code and insert it at the specified location.
+
+## Configuration File
+
+Customize Oi-Override using the \`oi-config.json\` file. Define the AI service, ignore specific files or directories, and configure other options.
+
+```json
+{
+  "name": "project name",
+  "ignore": ["node_modules", "*.test.js"]
+}
+```
+
+## Version 2.0 Plan
+
+Future enhancements for Oi-Override include:
+
+- Project Context Management: Generate better prompts with fewer tokens
+- Code Format: Use unified diff format for improved code insertion
+- Multiple File Edit: Edit multiple files simultaneously for complex tasks
+- Script Execution: Write and execute scripts to automate tasks
+
+## Contributing
+
+Contributions are welcome! Follow these steps to contribute:
+
+1. Fork the repository
+2. Create a new branch for your feature or fix
+3. Use the target version branch as base
+4. Submit a pull request and describe your changes
+
+Join our \[Discord\](https://discord.com/invite/Z7F4vRq3n8) community for discussions and collaboration.
+
+## License
+
+Oi-Override is licensed under the GNU GPL-2.0 License. See the \[LICENSE\](LICENSE) file for more details.
